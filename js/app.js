@@ -122,11 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="cell-bullet" style="background-color: ${item.cor}"></span>
                         ${item.nome}
                     </td>
-                    <td class="mono-cell flex-cell">
-                        <span>${item.taxaAnualDesc}</span>
-                        <span class="info-tooltip">
-                            <i data-lucide="info"></i>
-                            <span class="tooltip-text">BCB: ${item.dataAtualizacao || (new Date()).toLocaleDateString('pt-BR')}</span>
+                    <td class="mono-cell">
+                        <span class="cell-rate-wrapper">
+                            <span>${item.taxaAnualDesc}</span>
+                            <span class="info-tooltip">
+                                <i data-lucide="info"></i>
+                                <span class="tooltip-text">BCB: ${item.dataAtualizacao || (new Date()).toLocaleDateString('pt-BR')}</span>
+                            </span>
                         </span>
                     </td>
                     <td>${window.ApiBCB.formatarMoeda(item.totalInvestido)}</td>
