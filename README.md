@@ -8,7 +8,7 @@ Permite simular aportes iniciais e mensais, comparando lado a lado os ativos mai
 
 ## 🚀 Demonstração
 
-- **Acesse online:** [simulador-de-investimento](https://projeto-simulador-de-investimento.vercel.app/)
+- **Acesse online:** [simulador-de-investimento](https://simulacao-investimento.vercel.app/)
 
 ---
 
@@ -125,7 +125,7 @@ Projeto-simulacao-investimento/
 
 ## 🌐 Publicação / Deploy
 
-O projeto é 100% estático (HTML, CSS e JS puro) e pode ser hospedado gratuitamente com um único clique em serviços como:
+O projeto pode ser hospedado gratuitamente com um único clique em serviços como:
 - **[Vercel](https://vercel.com/)** *(Recomendado)*
 - **[Cloudflare Pages](https://pages.cloudflare.com/)**
 - **[GitHub Pages](https://pages.github.com/)**
