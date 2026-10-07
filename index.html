@@ -27,61 +27,99 @@
                 <div class="logo-icon">
                     <i data-lucide="trending-up"></i>
                 </div>
-                <h1>Simulador de Investimentos</h1>
+                <div>
+                    <h1>SimulaInvest</h1>
+                    <span class="logo-tagline">Renda Fixa Inteligente</span>
+                </div>
+            </div>
+
+            <div id="bcb-status-badge" class="header-badge online">
+                <span class="live-pulse"></span>
+                <span>Banco Central Conectado</span>
             </div>
         </div>
     </header>
 
     <main class="app-container">
-        <div class="layout-grid">
 
-            <div class="col-left">
+        <!-- Hero de Abertura: Proposta clara e acolhedora -->
+        <section class="hero-intro">
+            <h2 class="hero-title">Qual aplicação rende mais para o seu bolso?</h2>
+            <p class="hero-desc">
+                Simule seus aportes e compare o rendimento líquido real de <strong>Tesouro Selic, Tesouro IPCA+, CDBs, LCI/LCA e Poupança</strong> já com a dedução do Imposto de Renda.
+            </p>
+        </section>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i data-lucide="calculator"></i>
-                            Quanto deseja investir?
-                        </h2>
+        <!-- Bloco 1: Formulário Hero Espaçado e Digerível -->
+        <section class="card hero-form-card">
+            <div class="form-header-row">
+                <div class="section-title-wrap">
+                    <div class="icon-circle">
+                        <i data-lucide="calculator"></i>
                     </div>
-
-                    <div class="form-group">
-                        <label for="valor-inicial">Investimento Inicial</label>
-                        <div class="input-wrapper">
-                            <span class="prefix">R$</span>
-                            <input type="number" id="valor-inicial" value="5000" min="0" step="100">
-                        </div>
+                    <div>
+                        <h3 class="section-heading">Quanto deseja investir?</h3>
+                        <p class="section-subheading">Preencha os valores abaixo para calcular as projeções em tempo real.</p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label for="valor-mensal">Aporte Todo Mês</label>
-                        <div class="input-wrapper">
-                            <span class="prefix">R$</span>
-                            <input type="number" id="valor-mensal" value="500" min="0" step="50">
-                        </div>
+            <div class="hero-inputs-grid">
+                <div class="form-group">
+                    <label for="valor-inicial">
+                        <span>Investimento Inicial</span>
+                        <span class="helper-info">Aplicação hoje</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <span class="prefix">R$</span>
+                        <input type="number" id="valor-inicial" value="1000" min="0" step="100" placeholder="0">
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="valor-periodo">Tempo da Aplicação</label>
-                        <div class="periodo-group">
-                            <input type="number" id="valor-periodo" value="2" min="1" step="1">
-                            <select id="unidade-periodo">
-                                <option value="anos" selected>Anos</option>
-                                <option value="meses">Meses</option>
-                            </select>
-                        </div>
+                <div class="form-group">
+                    <label for="valor-mensal">
+                        <span>Aporte Mensal</span>
+                        <span class="helper-info">Todo mês</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <span class="prefix">R$</span>
+                        <input type="number" id="valor-mensal" value="500" min="0" step="50" placeholder="0">
                     </div>
+                </div>
 
-                    <details class="accordion-rates">
-                        <summary>
-                            <span class="summary-label">
-                                <i data-lucide="sliders"></i>
-                                Taxas de mercado & Banco Central
-                            </span>
-                            <i data-lucide="chevron-down"></i>
-                        </summary>
-                        <div class="accordion-content">
-                            <div class="rate-section-title">Oficiais do Banco Central:</div>
+                <div class="form-group">
+                    <label for="valor-periodo">
+                        <span>Tempo da Aplicação</span>
+                        <span class="helper-info">Prazo final</span>
+                    </label>
+                    <div class="periodo-group">
+                        <input type="number" id="valor-periodo" value="2" min="1" step="1">
+                        <select id="unidade-periodo" aria-label="Unidade do período">
+                            <option value="anos" selected>Anos</option>
+                            <option value="meses">Meses</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parâmetros de Mercado & BCB em Accordion Elegante -->
+            <details class="accordion-rates" id="accordion-taxas">
+                <summary>
+                    <span class="summary-label">
+                        <i data-lucide="sliders-horizontal"></i>
+                        <span>Parâmetros de Mercado & Taxas do Banco Central</span>
+                        <span class="rates-tag">Avançado</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </summary>
+                <div class="accordion-content">
+                    <div class="rates-subgrid">
+
+                        <div class="rates-column">
+                            <div class="rate-section-title">
+                                <i data-lucide="landmark"></i>
+                                Taxas Oficiais (API Banco Central):
+                            </div>
 
                             <div class="rate-row">
                                 <div class="rate-label-wrap">
@@ -91,7 +129,10 @@
                                         <span id="tip-selic" class="tooltip-text">Atualizado pelo BCB em: --</span>
                                     </span>
                                 </div>
-                                <input type="number" id="taxa-selic" value="13.75" step="0.25">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="taxa-selic" value="13.75" step="0.25">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
 
                             <div class="rate-row">
@@ -102,7 +143,10 @@
                                         <span id="tip-cdi" class="tooltip-text">Atualizado pelo BCB em: --</span>
                                     </span>
                                 </div>
-                                <input type="number" id="taxa-cdi" value="13.65" step="0.25">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="taxa-cdi" value="13.65" step="0.25">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
 
                             <div class="rate-row">
@@ -113,7 +157,10 @@
                                         <span id="tip-ipca" class="tooltip-text">Atualizado pelo BCB em: --</span>
                                     </span>
                                 </div>
-                                <input type="number" id="taxa-ipca" value="4.22" step="0.1">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="taxa-ipca" value="4.22" step="0.1">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
 
                             <div class="rate-row">
@@ -124,7 +171,10 @@
                                         <span id="tip-poupanca" class="tooltip-text">Atualizado pelo BCB em: --</span>
                                     </span>
                                 </div>
-                                <input type="number" id="taxa-poupanca" value="0.6339" step="0.01">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="taxa-poupanca" value="0.6339" step="0.01">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
 
                             <div class="rate-row">
@@ -135,112 +185,158 @@
                                         <span id="tip-tr" class="tooltip-text">Atualizado pelo BCB em: --</span>
                                     </span>
                                 </div>
-                                <input type="number" id="taxa-tr" value="0.1332" step="0.01">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="taxa-tr" value="0.1332" step="0.01">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="rate-section-title">Parâmetros dos Produtos:</div>
+                        <div class="rates-column">
+                            <div class="rate-section-title">
+                                <i data-lucide="settings-2"></i>
+                                Calibragem dos Produtos:
+                            </div>
 
                             <div class="rate-row">
                                 <label for="param-cdb">Rentabilidade CDB (% CDI):</label>
-                                <input type="number" id="param-cdb" value="100">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="param-cdb" value="100">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
+
                             <div class="rate-row">
-                                <label for="param-ipca">Juro Real Tesouro IPCA (%):</label>
-                                <input type="number" id="param-ipca" value="6.5" step="0.25">
+                                <label for="param-ipca">Juro Real Tesouro IPCA (% a.a.):</label>
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="param-ipca" value="6.5" step="0.25">
+                                    <span class="unit-symbol">%</span>
+                                </div>
                             </div>
+
                             <div class="rate-row">
                                 <label for="param-lci">LCI / LCA (% CDI - Isento):</label>
-                                <input type="number" id="param-lci" value="90">
+                                <div class="rate-input-wrap">
+                                    <input type="number" id="param-lci" value="90">
+                                    <span class="unit-symbol">%</span>
+                                </div>
+                            </div>
+
+                            <div class="rates-reset-row">
+                                <button type="button" id="btn-reset-parametros" class="btn-reset">
+                                    <i data-lucide="rotate-ccw"></i>
+                                    Restaurar parâmetros padrões
+                                </button>
                             </div>
                         </div>
-                    </details>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i data-lucide="award"></i>
-                            Ranking das Aplicações
-                        </h2>
-                    </div>
-                    <div id="lista-investimentos" class="ranking-list">
                     </div>
                 </div>
+            </details>
+        </section>
 
-                <div class="methodology-box">
-                    <i data-lucide="shield-check"></i>
-                    <span>Cálculos líquidos com Imposto de Renda regressivo (15% a 22,5%) e isenção de Poupança e
-                        LCI/LCA já deduzidos.</span>
+        <!-- Bloco 2: O Campeão de Rentabilidade (Destaque Principal com Hierarquia Limpa) -->
+        <section class="hero-highlight" id="card-campeao">
+            <div class="highlight-content">
+                <div class="left-side">
+                    <div class="top-tag">
+                        <i data-lucide="trophy"></i>
+                        <span>Maior Retorno Líquido no Período</span>
+                    </div>
+                    <h2 id="destaque-melhor-nome" class="champion-title">Tesouro IPCA+</h2>
+                    <div class="profit-wrap">
+                        <span class="profit-legend">Lucro líquido projetado:</span>
+                        <span id="destaque-melhor-lucro" class="profit-highlight">+R$ 0,00 (+0,00%)</span>
+                    </div>
                 </div>
 
+                <div class="right-side">
+                    <span class="final-label">Montante Final Líquido</span>
+                    <span id="destaque-melhor-total" class="final-value">R$ 0,00</span>
+                    <span class="invested-sub">
+                        Total aportado: <strong id="destaque-total-investido">R$ 0,00</strong>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloco 3: Grid de Comparativo (Ranking à esquerda, Gráfico à direita) -->
+        <div class="results-grid">
+
+            <div class="card ranking-card-wrapper">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i data-lucide="award"></i>
+                        Ranking das Aplicações
+                    </h3>
+                    <span class="badge-subtle">Ordem decrescente</span>
+                </div>
+                <div id="lista-investimentos" class="ranking-list">
+                    <!-- Cards renderizados dinamicamente pelo JS -->
+                </div>
             </div>
 
-            <div class="col-right">
-
-                <div class="hero-highlight">
-                    <div class="highlight-content">
-                        <div class="left-side">
-                            <span class="top-tag">Maior Retorno Líquido</span>
-                            <h2 id="destaque-melhor-nome">Tesouro IPCA+</h2>
-                            <span id="destaque-melhor-lucro" class="profit-highlight">+R$ 0,00 (+0,00%)</span>
-                        </div>
-
-                        <div class="right-side">
-                            <span class="final-label">Montante Final</span>
-                            <span id="destaque-melhor-total" class="final-value">R$ 0,00</span>
-                            <span class="invested-sub">
-                                Aporte total: <strong id="destaque-total-investido">R$ 0,00</strong>
-                            </span>
-                        </div>
+            <div class="card chart-card-wrapper">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i data-lucide="bar-chart-2"></i>
+                        Comparativo Visual
+                    </h3>
+                    <div class="chart-controls">
+                        <button id="btn-grafico-barras" class="chart-tab-btn active">
+                            <i data-lucide="bar-chart"></i>
+                            Barras
+                        </button>
+                        <button id="btn-grafico-linhas" class="chart-tab-btn">
+                            <i data-lucide="trending-up"></i>
+                            Evolução
+                        </button>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i data-lucide="bar-chart-2"></i>
-                            Comparativo Visual
-                        </h2>
-                        <div class="chart-controls">
-                            <button id="btn-grafico-barras" class="active">Barras</button>
-                            <button id="btn-grafico-linhas">Evolução</button>
-                        </div>
-                    </div>
-
-                    <div class="chart-wrapper">
-                        <canvas id="graficoCanvas"></canvas>
-                    </div>
+                <div class="chart-wrapper">
+                    <canvas id="graficoCanvas"></canvas>
                 </div>
-
-                <div class="card table-card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i data-lucide="table"></i>
-                            Detalhamento Financeiro Completo
-                        </h2>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Aplicação</th>
-                                    <th>Taxa</th>
-                                    <th>Total Investido</th>
-                                    <th>Lucro Líquido</th>
-                                    <th>Valor Líquido</th>
-                                    <th>Imposto IR</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabela-detalhada-corpo">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
             </div>
 
         </div>
+
+        <!-- Bloco 4: Tabela Analítica Completa -->
+        <section class="card table-card">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">
+                        <i data-lucide="table"></i>
+                        Detalhamento Financeiro Completo
+                    </h3>
+                    <p class="table-subtitle">Valores detalhados com alíquota regressiva de IR e resgate líquido.</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aplicação</th>
+                            <th>Taxa Anual</th>
+                            <th>Total Investido</th>
+                            <th>Lucro Líquido</th>
+                            <th>Montante Líquido</th>
+                            <th>Imposto (IR)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-detalhada-corpo">
+                        <!-- Linhas renderizadas dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="methodology-box">
+                <i data-lucide="shield-check"></i>
+                <span>Cálculos líquidos com Imposto de Renda regressivo da Receita Federal (15% a 22,5%) e isenção legal para Poupança e LCI/LCA já deduzidos. Custódia B3 de 0,20% ao ano deduzida no Tesouro quando aplicável.</span>
+            </div>
+        </section>
+
     </main>
 
     <script src="js/api.js"></script>

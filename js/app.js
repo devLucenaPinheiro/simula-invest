@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let ultimosResultados = []
+    let primeiraExecucao = true
 
     const inputInicial = document.getElementById('valor-inicial')
     const inputMensal = document.getElementById('valor-mensal')
@@ -18,18 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnGraficoBarras = document.getElementById('btn-grafico-barras')
     const btnGraficoLinhas = document.getElementById('btn-grafico-linhas')
+    const btnResetParametros = document.getElementById('btn-reset-parametros')
 
     function atualizarSimulacao() {
-        const inicial = Math.max(0, parseFloat(inputInicial.value) || 0)
-        const mensal = Math.max(0, parseFloat(inputMensal.value) || 0)
-        const periodo = Math.max(1, parseFloat(inputPeriodo.value) || 1)
-        const meses = selectUnidade.value === 'anos' ? Math.round(periodo * 12) : Math.round(periodo)
+        const inicial = Math.max(0, parseFloat(inputInicial?.value) || 0)
+        const mensal = Math.max(0, parseFloat(inputMensal?.value) || 0)
+        const periodo = Math.max(1, parseFloat(inputPeriodo?.value) || 1)
+        const meses = selectUnidade?.value === 'anos' ? Math.round(periodo * 12) : Math.round(periodo)
 
-        if (inputSelic) window.ApiBCB.taxas.selic.valor = parseFloat(inputSelic.value) || window.ApiBCB.taxas.selic.valor
-        if (inputCdi) window.ApiBCB.taxas.cdi.valor = parseFloat(inputCdi.value) || window.ApiBCB.taxas.cdi.valor
-        if (inputIpcaTaxa) window.ApiBCB.taxas.ipca.valor = parseFloat(inputIpcaTaxa.value) || window.ApiBCB.taxas.ipca.valor
-        if (inputPoupanca) window.ApiBCB.taxas.poupanca.valor = parseFloat(inputPoupanca.value) || window.ApiBCB.taxas.poupanca.valor
-        if (inputTr) window.ApiBCB.taxas.tr.valor = parseFloat(inputTr.value) || window.ApiBCB.taxas.tr.valor
+        if (inputSelic && window.ApiBCB.taxas.selic) window.ApiBCB.taxas.selic.valor = parseFloat(inputSelic.value) || window.ApiBCB.taxas.selic.valor
+        if (inputCdi && window.ApiBCB.taxas.cdi) window.ApiBCB.taxas.cdi.valor = parseFloat(inputCdi.value) || window.ApiBCB.taxas.cdi.valor
+        if (inputIpcaTaxa && window.ApiBCB.taxas.ipca) window.ApiBCB.taxas.ipca.valor = parseFloat(inputIpcaTaxa.value) || window.ApiBCB.taxas.ipca.valor
+        if (inputPoupanca && window.ApiBCB.taxas.poupanca) window.ApiBCB.taxas.poupanca.valor = parseFloat(inputPoupanca.value) || window.ApiBCB.taxas.poupanca.valor
+        if (inputTr && window.ApiBCB.taxas.tr) window.ApiBCB.taxas.tr.valor = parseFloat(inputTr.value) || window.ApiBCB.taxas.tr.valor
 
         const params = {
             inicial,
@@ -51,16 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (elemMelhorNome) {
             elemMelhorNome.textContent = campeao.nome
-            elemMelhorNome.classList.remove('glow-text-anim')
-            void elemMelhorNome.offsetWidth
-            elemMelhorNome.classList.add('glow-text-anim')
+            if (!primeiraExecucao) {
+                elemMelhorNome.classList.remove('glow-text-anim')
+                void elemMelhorNome.offsetWidth
+                elemMelhorNome.classList.add('glow-text-anim')
+            }
         }
         if (elemMelhorTotal) elemMelhorTotal.textContent = window.ApiBCB.formatarMoeda(campeao.montanteLiquido)
         if (elemMelhorLucro) elemMelhorLucro.textContent = `+${window.ApiBCB.formatarMoeda(campeao.lucroLiquido)} (+${window.ApiBCB.formatarPercentual(campeao.rentabilidadeLiquida)})`
         if (elemTotalInvestido) elemTotalInvestido.textContent = window.ApiBCB.formatarMoeda(campeao.totalInvestido)
 
-        const cardCampeao = document.querySelector('.hero-highlight')
-        if (cardCampeao) {
+        const cardCampeao = document.getElementById('card-campeao') || document.querySelector('.hero-highlight')
+        if (cardCampeao && !primeiraExecucao) {
             cardCampeao.classList.remove('glow-anim')
             void cardCampeao.offsetWidth
             cardCampeao.classList.add('glow-anim')
@@ -80,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="name-group">
                             <div class="name-row">
                                 <h4>${item.nome}</h4>
-                                ${ehPrimeiro ? '<span class="champion-badge">1º Lugar</span>' : ''}
+                                ${ehPrimeiro ? '<span class="champion-badge"><i data-lucide="crown"></i> 1º Lugar</span>' : ''}
                                 ${item.isentoIR ? '<span class="tax-exempt">Isento IR</span>' : ''}
                             </div>
                             <div class="rate-label flex-items">
@@ -114,7 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
             resultados.forEach(item => {
                 const tr = document.createElement('tr')
                 tr.innerHTML = `
-                    <td class="font-medium">${item.nome}</td>
+                    <td class="font-medium">
+                        <span class="cell-bullet" style="background-color: ${item.cor}"></span>
+                        ${item.nome}
+                    </td>
                     <td class="mono-cell flex-cell">
                         <span>${item.taxaAnualDesc}</span>
                         <span class="info-tooltip">
@@ -125,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${window.ApiBCB.formatarMoeda(item.totalInvestido)}</td>
                     <td class="profit-cell">+${window.ApiBCB.formatarMoeda(item.lucroLiquido)} <span class="profit-pct">(+${window.ApiBCB.formatarPercentual(item.rentabilidadeLiquida)})</span></td>
                     <td class="highlight-cell">${window.ApiBCB.formatarMoeda(item.montanteLiquido)}</td>
-                    <td class="mono-cell">${item.isentoIR ? 'Isento' : window.ApiBCB.formatarMoeda(item.valorIR)}</td>
+                    <td class="mono-cell">${item.isentoIR ? '<span class="text-emerald">Isento</span>' : window.ApiBCB.formatarMoeda(item.valorIR)}</td>
                 `
                 tbody.appendChild(tr)
             })
@@ -139,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnGraficoBarras) {
         btnGraficoBarras.addEventListener('click', () => {
             btnGraficoBarras.classList.add('active')
-            btnGraficoLinhas.classList.remove('active')
+            btnGraficoLinhas?.classList.remove('active')
             window.GerenciadorGrafico.renderizar(ultimosResultados, 'barras')
         })
     }
@@ -147,8 +154,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnGraficoLinhas) {
         btnGraficoLinhas.addEventListener('click', () => {
             btnGraficoLinhas.classList.add('active')
-            btnGraficoBarras.classList.remove('active')
+            btnGraficoBarras?.classList.remove('active')
             window.GerenciadorGrafico.renderizar(ultimosResultados, 'linhas')
+        })
+    }
+
+    if (btnResetParametros) {
+        btnResetParametros.addEventListener('click', () => {
+            if (inputCdb) inputCdb.value = 100
+            if (inputIpca) inputIpca.value = 6.5
+            if (inputLci) inputLci.value = 90
+
+            if (window.ApiBCB && window.ApiBCB.taxas) {
+                if (inputSelic && window.ApiBCB.taxas.selic) inputSelic.value = window.ApiBCB.taxas.selic.valor.toFixed(2)
+                if (inputCdi && window.ApiBCB.taxas.cdi) inputCdi.value = window.ApiBCB.taxas.cdi.valor.toFixed(2)
+                if (inputIpcaTaxa && window.ApiBCB.taxas.ipca) inputIpcaTaxa.value = window.ApiBCB.taxas.ipca.valor.toFixed(2)
+                if (inputPoupanca && window.ApiBCB.taxas.poupanca) inputPoupanca.value = window.ApiBCB.taxas.poupanca.valor.toFixed(4)
+                if (inputTr && window.ApiBCB.taxas.tr) inputTr.value = window.ApiBCB.taxas.tr.valor.toFixed(4)
+            }
+            atualizarSimulacao()
         })
     }
 
@@ -159,8 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
     inputsMonitorados.forEach(inp => {
         if (!inp) return
-        inp.addEventListener('input', atualizarSimulacao)
-        inp.addEventListener('change', atualizarSimulacao)
+        inp.addEventListener('input', () => {
+            primeiraExecucao = false
+            atualizarSimulacao()
+        })
+        inp.addEventListener('change', () => {
+            primeiraExecucao = false
+            atualizarSimulacao()
+        })
     })
 
     function atualizarStatusBcb(status, taxas) {
@@ -182,12 +212,26 @@ document.addEventListener('DOMContentLoaded', () => {
             setTip('tip-tr', taxas.tr.data, '226')
         }
 
+        const bcbBadge = document.getElementById('bcb-status-badge')
+        if (bcbBadge) {
+            if (status === 'online') {
+                bcbBadge.innerHTML = `<span class="live-pulse"></span><span>Banco Central Online (SGS)</span>`
+                bcbBadge.className = 'header-badge online'
+            } else {
+                bcbBadge.innerHTML = `<span class="offline-dot"></span><span>Modo Offline (Taxas Padrão)</span>`
+                bcbBadge.className = 'header-badge offline'
+            }
+        }
+
         if (window.lucide) {
             window.lucide.createIcons()
         }
     }
 
+    // Inicialização silenciosa: carrega taxas e renderiza sem acionar animações invasivas
     window.ApiBCB.buscarTaxas(atualizarStatusBcb).then(() => {
         atualizarSimulacao()
+        // Após a primeira renderização estática, as próximas interações do usuário poderão disparar o feedback visual sutil
+        primeiraExecucao = false
     })
 })
