@@ -178,3 +178,23 @@ tr {
     height: 1.1rem;
   }
 }
+
+.table-scroll-hint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .table-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: $color-emerald-light;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.22rem 0.55rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+}

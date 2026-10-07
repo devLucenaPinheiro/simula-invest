@@ -1206,21 +1206,432 @@ tr:hover td {
   height: 1.1rem;
 }
 
-/* Responsividade adicional */
-@media (max-width: 640px) {
-  .app-container {
-    padding: 1.25rem 0.85rem 3rem 0.85rem;
+.badge-text-mobile {
+  display: none;
+}
+
+.table-scroll-hint {
+  display: none;
+}
+
+/* ========================================================
+   SISTEMA DE DESIGN RESPONSIVO - MOBILE FIRST & REFINADO
+   ======================================================== */
+
+@media (max-width: 768px) {
+  .table-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--color-emerald-light);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.22rem 0.55rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    animation: hintSlide 2.5s infinite ease-in-out;
   }
+  .table-scroll-hint i {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+}
+
+@keyframes hintSlide {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Layout e Container */
+  .app-container {
+    padding: 1.15rem 0.85rem 3rem 0.85rem;
+  }
+
   .card {
     padding: 1.15rem;
+    border-radius: var(--radius-xl);
   }
+
+  /* Header Mobile */
+  .app-header {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .logo-box {
+    gap: 0.5rem;
+  }
+
+  .logo-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .logo-icon i {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .logo-box h1 {
+    font-size: 1.05rem;
+  }
+
+  .logo-tagline {
+    font-size: 0.65rem;
+  }
+
+  .header-badge {
+    font-size: 0.7rem;
+    padding: 0.28rem 0.65rem;
+    gap: 0.35rem;
+  }
+
+  /* Hero Intro */
+  .hero-intro {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-desc {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  /* Formulário de Aportes */
+  .hero-form-card {
+    padding: 1.15rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-header-row {
+    margin-bottom: 1rem;
+  }
+
+  .icon-circle {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .icon-circle i {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .section-heading {
+    font-size: 1.02rem;
+  }
+
+  .section-subheading {
+    font-size: 0.75rem;
+  }
+
+  .hero-inputs-grid {
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .helper-info {
+    font-size: 0.65rem;
+  }
+
+  .input-wrapper input {
+    font-size: 1rem;
+    padding: 0.65rem 0.75rem 0.65rem 2.35rem;
+    min-height: 44px;
+  }
+
+  .input-wrapper .prefix {
+    left: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .periodo-group input {
+    font-size: 1rem;
+    padding: 0.65rem;
+    min-height: 44px;
+  }
+
+  .periodo-group select {
+    font-size: 0.85rem;
+    width: 5.8rem;
+    padding: 0.65rem 0.45rem;
+    min-height: 44px;
+  }
+
+  /* Accordion de Taxas */
+  .accordion-rates {
+    padding-top: 0.85rem;
+    margin-top: 0.6rem;
+  }
+
+  .summary-label {
+    font-size: 0.78rem;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    max-width: calc(100% - 24px);
+    line-height: 1.35;
+  }
+
+  .rates-tag {
+    font-size: 0.58rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  .rates-subgrid {
+    padding: 0.85rem;
+    gap: 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .rate-section-title {
+    font-size: 0.68rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .rate-row {
+    font-size: 0.74rem;
+    margin-bottom: 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .rate-input-wrap {
+    padding: 0.18rem 0.4rem;
+  }
+
+  .rate-input-wrap input {
+    width: 4.2rem;
+    font-size: 0.78rem;
+  }
+
+  .btn-reset {
+    width: 100%;
+    justify-content: center;
+    padding: 0.55rem;
+    font-size: 0.74rem;
+    min-height: 40px;
+  }
+
+  /* Card Campeão de Rentabilidade */
   .hero-highlight {
-    padding: 1.25rem;
+    padding: 1.15rem;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius-xl);
   }
+
+  .highlight-content {
+    gap: 1rem;
+  }
+
+  .top-tag {
+    font-size: 0.68rem;
+    padding: 0.18rem 0.55rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .champion-title {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .profit-wrap {
+    margin-top: 0.25rem;
+    gap: 0.35rem;
+  }
+
+  .profit-legend {
+    font-size: 0.74rem;
+  }
+
+  .profit-highlight {
+    font-size: 0.88rem;
+  }
+
+  .highlight-content .right-side {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.85rem;
+    margin-top: 0.25rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .final-label {
+    font-size: 0.68rem;
+  }
+
   .final-value {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
+    line-height: 1.15;
+    margin: 0.15rem 0;
   }
+
+  .invested-sub {
+    font-size: 0.74rem;
+  }
+
+  /* Grid de Resultados */
+  .results-grid {
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Gráfico */
   .chart-wrapper {
-    height: 300px;
+    height: 320px;
+    min-height: 280px;
+  }
+
+  /* Tabela Mobile */
+  .table-card {
+    padding: 1.15rem;
+    border-radius: var(--radius-xl);
+  }
+
+  .table-header-flex {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+  }
+
+  table {
+    min-width: 630px;
+    font-size: 0.78rem;
+  }
+
+  th, td {
+    padding: 0.65rem 0.65rem;
+  }
+
+  th:nth-child(1), td:nth-child(1) {
+    padding-left: 0.85rem;
+    min-width: 155px;
+  }
+
+  th:nth-child(6), td:nth-child(6) {
+    padding-right: 0.85rem;
+    min-width: 85px;
+  }
+
+  .methodology-box {
+    margin-top: 1rem;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.72rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  /* Adaptação do Header Badge para telas estreitas */
+  .badge-text-full {
+    display: none;
+  }
+  .badge-text-mobile {
+    display: inline;
+  }
+
+  /* Cards do Ranking no Mobile */
+  .ranking-card {
+    padding: 0.8rem;
+    gap: 0.55rem;
+    align-items: flex-start;
+    border-radius: var(--radius-lg);
+  }
+
+  .color-indicator {
+    height: 2.7rem;
+    width: 0.25rem;
+  }
+
+  .card-info {
+    gap: 0.55rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .name-row {
+    gap: 0.35rem;
+  }
+
+  .name-row h4 {
+    font-size: 0.84rem;
+    white-space: normal;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .champion-badge,
+  .tax-exempt {
+    font-size: 0.58rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .rate-label {
+    font-size: 0.68rem;
+    margin-top: 0.2rem;
+  }
+
+  .card-values {
+    text-align: right;
+    min-width: fit-content;
+  }
+
+  .net-amount {
+    font-size: 0.92rem;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  .profit-badge {
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  /* Controles do Gráfico */
+  .chart-tab-btn {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Telas Ultra-Compactas (ex: iPhone SE / 360px) */
+  .app-container {
+    padding: 0.85rem 0.65rem 2.5rem 0.65rem;
+  }
+
+  .card {
+    padding: 0.95rem;
+  }
+
+  .hero-title {
+    font-size: 1.32rem;
+  }
+
+  .champion-title {
+    font-size: 1.3rem;
+  }
+
+  .final-value {
+    font-size: 1.6rem;
+  }
+
+  .ranking-card {
+    padding: 0.7rem 0.6rem;
   }
 }

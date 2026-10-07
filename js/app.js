@@ -223,10 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const bcbBadge = document.getElementById('bcb-status-badge')
         if (bcbBadge) {
             if (status === 'online') {
-                bcbBadge.innerHTML = `<span class="live-pulse"></span><span>Banco Central Online (SGS)</span>`
+                bcbBadge.innerHTML = `<span class="live-pulse"></span><span class="badge-text-full">Banco Central Online (SGS)</span><span class="badge-text-mobile">BCB Online</span>`
                 bcbBadge.className = 'header-badge online'
             } else {
-                bcbBadge.innerHTML = `<span class="offline-dot"></span><span>Modo Offline (Taxas Padrão)</span>`
+                bcbBadge.innerHTML = `<span class="offline-dot"></span><span class="badge-text-full">Modo Offline (Taxas Padrão)</span><span class="badge-text-mobile">Offline</span>`
                 bcbBadge.className = 'header-badge offline'
             }
         }

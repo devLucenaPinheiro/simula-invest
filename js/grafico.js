@@ -70,11 +70,16 @@ const GerenciadorGrafico = {
                             easing: 'easeOutQuart'
                         }
                     },
-                    indexAxis: window.innerWidth < 640 ? 'y' : 'x',
+                    indexAxis: 'x',
                     plugins: {
                         legend: {
                             position: 'top',
-                            labels: { color: '#94a3b8', font: { size: 12 }, usePointStyle: true }
+                            labels: {
+                                color: '#94a3b8',
+                                font: { size: window.innerWidth < 480 ? 10 : 12 },
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
                         },
                         tooltip: {
                             backgroundColor: '#0f172a',
@@ -96,17 +101,18 @@ const GerenciadorGrafico = {
                             grid: { color: 'rgba(51, 65, 85, 0.3)' },
                             ticks: {
                                 color: '#94a3b8',
-                                maxRotation: 0,
+                                maxRotation: window.innerWidth < 480 ? 20 : 0,
                                 minRotation: 0,
                                 autoSkip: false,
-                                font: { size: 11, weight: '500' }
+                                font: { size: window.innerWidth < 480 ? 9.5 : 11, weight: '500' }
                             }
                         },
                         y: {
                             grid: { color: 'rgba(51, 65, 85, 0.3)' },
                             ticks: {
                                 color: '#94a3b8',
-                                callback: (v) => 'R$ ' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v)
+                                callback: (v) => 'R$ ' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v),
+                                font: { size: window.innerWidth < 480 ? 9.5 : 11 }
                             }
                         }
                     }
@@ -166,7 +172,12 @@ const GerenciadorGrafico = {
                     plugins: {
                         legend: {
                             position: 'top',
-                            labels: { color: '#94a3b8', font: { size: 11 }, usePointStyle: true }
+                            labels: {
+                                color: '#94a3b8',
+                                font: { size: window.innerWidth < 480 ? 9.5 : 11 },
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
                         },
                         tooltip: {
                             backgroundColor: '#0f172a',
@@ -178,12 +189,20 @@ const GerenciadorGrafico = {
                         }
                     },
                     scales: {
-                        x: { grid: { color: 'rgba(51, 65, 85, 0.3)' }, ticks: { color: '#94a3b8', maxTicksLimit: 8 } },
+                        x: {
+                            grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                            ticks: {
+                                color: '#94a3b8',
+                                maxTicksLimit: window.innerWidth < 480 ? 5 : 8,
+                                font: { size: window.innerWidth < 480 ? 9.5 : 11 }
+                            }
+                        },
                         y: {
                             grid: { color: 'rgba(51, 65, 85, 0.3)' },
                             ticks: {
                                 color: '#94a3b8',
-                                callback: (v) => 'R$ ' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v)
+                                callback: (v) => 'R$ ' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v),
+                                font: { size: window.innerWidth < 480 ? 9.5 : 11 }
                             }
                         }
                     }

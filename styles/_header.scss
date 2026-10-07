@@ -44,3 +44,16 @@
   justify-content: center;
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
+
+.badge-text-mobile {
+  display: none;
+}
+
+@media (max-width: 540px) {
+  .badge-text-full {
+    display: none;
+  }
+  .badge-text-mobile {
+    display: inline;
+  }
+}
