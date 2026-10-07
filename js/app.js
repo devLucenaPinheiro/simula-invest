@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 elemMelhorNome.classList.remove('glow-text-anim')
                 void elemMelhorNome.offsetWidth
                 elemMelhorNome.classList.add('glow-text-anim')
+                elemMelhorNome.addEventListener('animationend', () => {
+                    elemMelhorNome.classList.remove('glow-text-anim')
+                }, { once: true })
             }
         }
         if (elemMelhorTotal) elemMelhorTotal.textContent = window.ApiBCB.formatarMoeda(campeao.montanteLiquido)
@@ -68,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cardCampeao.classList.remove('glow-anim')
             void cardCampeao.offsetWidth
             cardCampeao.classList.add('glow-anim')
+            cardCampeao.addEventListener('animationend', () => {
+                cardCampeao.classList.remove('glow-anim')
+            }, { once: true })
         }
 
         const containerLista = document.getElementById('lista-investimentos')

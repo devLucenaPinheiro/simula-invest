@@ -35,7 +35,7 @@
 }
 
 .glow-text-anim {
-  display: inline-block;
+  display: block;
   animation: textGlowPulse 1.6s cubic-bezier(0.25, 1, 0.5, 1);
   transform-origin: left center;
 }
@@ -96,6 +96,10 @@
   }
 
   .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
     .top-tag {
       font-size: 0.7rem;
       font-weight: 700;

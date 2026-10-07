@@ -603,7 +603,7 @@ input[type=number] {
 }
 
 .glow-text-anim {
-  display: inline-block;
+  display: block;
   animation: textGlowPulse 1.6s cubic-bezier(0.25, 1, 0.5, 1);
   transform-origin: left center;
 }
@@ -660,6 +660,12 @@ input[type=number] {
     align-items: center;
     justify-content: space-between;
   }
+}
+.highlight-content .left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 .highlight-content .left-side .top-tag {
   font-size: 0.7rem;
